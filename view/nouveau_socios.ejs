@@ -11,18 +11,19 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
-    <script
+    <!-- <script
       defer
       src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
       integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
     <header class="header-bar mb-3">
       <div
@@ -55,23 +56,45 @@
               style="width: 32px; height: 32px; border-radius: 16px"
               src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128"
           /></a>
-          <a class="btn btn-sm btn-success mr-2" href="/creer_socios">Nouveau socios</a>
-          <form action="/deconnecter" method="post"class="d-inline">
-            <button  class="btn btn-sm btn-secondary">Déconnexion</button>
+          <a class="btn btn-sm btn-success mr-2" href="/creer_socios"
+            >Nouveau socios</a
+          >
+          <form action="/deconnecter" method="POST" class="d-inline">
+            <button class="btn btn-sm btn-secondary">Déconnexion</button>
           </form>
         </div>
       </div>
     </header>
 
     <div class="container py-md-5 container--narrow">
-      <div class="text-center">
-        <h2>Salut <strong> <%= nomUtilisateur %></strong>, votre muros est vide.</h2>
-        <p class="lead text-muted">
-          Votre muros affiche les derniers socios des gus que vous suivez. Vous
-          pouvez trouver de nouveaux gus à suivre en utilisant la recherche dans
-          la barre de menu pour repérer des socios qui vous intéressent.
-        </p>
-      </div>
+      <form>
+        <div class="form-group">
+          <label for="titre-socios" class="text-muted mb-1">
+            <small>Titre</small>
+          </label>
+          <input
+            required
+            id="titre-socios"
+            class="form-control form-control-lg form-control-title"
+            type="text"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contenu-socios" class="text-muted mb-1">
+            <small>Contenu</small>
+          </label>
+          <textarea
+            required
+            id="contenu-socios"
+            class="body-content tall-textarea form-control"
+            type="text"
+          ></textarea>
+        </div>
+
+        <button class="btn btn-primary">Publier le socios</button>
+      </form>
     </div>
 
     <footer class="border-top text-center small text-muted py-3">

@@ -1,5 +1,17 @@
 const Utilisateur = require('../models/Utilisateur')
 
+
+exports.doitEtreConnecter = function (req, res, next) {
+   if(req.session.utilisateur){
+      next()
+   }else{
+      req.flash('erreursConnexion', 'Vous ne pouvez pas effectuer cette opération')
+      req.session.save(() => {
+         res.redirect('/')
+      })
+   }
+}
+
 // une propriété connecter qui sera dispo dans ce qui sera exporté
 
 
