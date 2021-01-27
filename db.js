@@ -8,13 +8,13 @@ const PORT = process.env.PORT || 3000
 
 const options = {
     useNewUrlParser: true,
-    useUnifierTopology: true
+    useUnifiedTopology: true
 };
 
 mongodb.connect(connectionString, options, (err, client) => {
 
     if(!err) {
-    module.exports =client.db();
+    module.exports =client;
     const app = require('./app');
     app.listen(PORT)
     console.log(`server is listening on port : ${PORT}`)

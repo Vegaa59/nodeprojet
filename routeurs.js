@@ -7,6 +7,9 @@ routeur.get('/', utilisateurController.acceuil )
 
 routeur.post('/inscrire', utilisateurController.inscrire )
 
+routeur.post('/connecter', utilisateurController.connecter)
+
+routeur.post('/deconnecter', utilisateurController.deconnecter)
 
 // routeur.get('/contact', (req, res) => {
 //     res.send('Contact')

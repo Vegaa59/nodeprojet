@@ -32,7 +32,7 @@
         <h4 class="my-0 mr-md-auto font-weight-normal">
           <a href="/" class="text-white">Socios</a>
         </h4>
-        <form class="mb-0 pt-2 pt-md-0">
+        <form action="connecter" method="post" class="mb-0 pt-2 pt-md-0">
           <div class="row align-items-center">
             <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
               <input
@@ -60,6 +60,9 @@
     </header>
 
     <div class="container py-md-5">
+      <% erreursConnexion.forEach(erreur => { %> 
+      <div class="text-center alert alert-danger"><%= erreur %></div>
+        <%  }) %>
       <div class="row align-items-center">
         <div class="col-lg-7 py-3 py-md-5">
           <h1 class="display-3">Pourquoi Socios ?</h1>
@@ -70,6 +73,9 @@
         </div>
         <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
           <form action="/inscrire" method="POST">
+            <% erreursInscription.forEach(erreur => { %>
+              <div class="text-center alert alert-danger"> <%= erreur %></div>
+              <% }) %>
             <div class="form-group">
               <label for="nom-inscription" class="text-muted mb-1"
                 ><small>Nom d'utilisateur</small></label
@@ -92,7 +98,7 @@
                 id="email-inscription"
                 name="emailInscription"
                 class="form-control"
-                type="text"
+                type="mail"
                 placeholder="votre.email@exemple.fr"
                 autocomplete="off"
               />

@@ -1,6 +1,6 @@
 const validator = require('validator')
-const utilisateurCollection = require('../db.js').collection('utilisateurs')
-const bcrypt = require('bcrypt')
+const utilisateurCollection = require('../db.js').db().collection('utilisateurs')
+const bcrypt = require('bcryptjs')
 //fonction constructeur qui crée un nouvel objet 
 
 let Utilisateur = function(donnees){
@@ -15,6 +15,13 @@ Utilisateur.prototype.nettoyerentrees = function(){
         nom: this.donnees.nomInscription.trim().toLowerCase(),
         email: this.donnees.emailInscription.trim().toLowerCase(),
         mdp: this.donnees.mdpInscription,
+    }
+}
+
+Utilisateur.prototype.nettoyerentreesConnection = function() {
+    this.donnees = {
+        nom: this.donnees.nomConnexion.trim().toLowerCase(),
+        mdp: this.donnees.mdpConnexion,
     }
 }
 
@@ -55,9 +62,25 @@ Utilisateur.prototype.inscrire = function(){
     this.validerEntrees();
     // sauvegarde en DB 
     if(this.erreurs.length == 0){
+        this.donnees.mdp = bcrypt.hashSync(this.donnees.mdp, 10 )
         utilisateurCollection.insertOne(this.donnees)
     }
 }
 
+Utilisateur.prototype.connecter = async function (){
+    this.nettoyerentreesConnection()
+    let utilisateurTrouve
+    try{
+     utilisateurTrouve = await utilisateurCollection.findOne({nom: this.donnees.nom}) 
+    }catch(err){
+        console.log('throw1')
+        throw "une erreur s'est produite, try again ! "
+    }
+
+    if(!utilisateurTrouve || !bcrypt.compareSync(this.donnees.mdp ,utilisateurTrouve.mdp)){
+        throw "nom d'utilisateur ou mot de passe incorrect ! "
+
+    }
+}
 
 module.exports = Utilisateur;
